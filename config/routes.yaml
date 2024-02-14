@@ -1,0 +1,14 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+index:
+    path: /index
+    controller: App\Controller\IndexController::index
+
+api_shipping_cost:
+    path: /api/shipping-cost
+    controller: App\Controller\ApiController::calculateShippingCost
+    methods: ['POST']

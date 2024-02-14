@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Shipping Cost Calculator</h1>
+    <form id="shipping-cost-form">
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" name="weight" required><br><br>
+
+        <label for="carrier">Carrier:</label>
+        <select id="carrier" name="carrier">
+            <option value="transcompany">TransCompany</option>
+            <option value="packgroup">PackGroup</option>
+        </select><br><br>
+
+        <button type="submit">Calculate Price</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('shipping-cost-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const weight = document.getElementById('weight').value;
+            const carrier = document.getElementById('carrier').value;
+
+            fetch('/api/shipping-cost', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    weight: weight,
+                    carrier_slug: carrier
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+
+                    const resultDiv = document.getElementById('result');
+
+                    resultDiv.innerText = `Shipping cost: ${data.cost} EUR`;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+{% endblock %}
