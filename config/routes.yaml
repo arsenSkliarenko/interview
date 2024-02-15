@@ -17,3 +17,8 @@ api_tag_parser:
     path: /test
     controller: App\Controller\TagParserController::parseTags
     methods: ['POST', 'GET']
+
+api_text_extract:
+    path: /test/extract
+    controller: App\Controller\ExtractTextController::extractText
+    methods: ['POST', 'GET']
