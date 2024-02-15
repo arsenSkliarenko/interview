@@ -12,3 +12,8 @@ api_shipping_cost:
     path: /api/shipping-cost
     controller: App\Controller\ApiController::calculateShippingCost
     methods: ['POST']
+
+api_tag_parser:
+    path: /test
+    controller: App\Controller\TagParserController::parseTags
+    methods: ['POST', 'GET']
